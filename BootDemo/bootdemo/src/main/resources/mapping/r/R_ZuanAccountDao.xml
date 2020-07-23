@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yn.bootdemo.durid.multiple.dao.r.R_ZuanAccountDao">
+  <resultMap id="BaseResultMap" type="cn.yn.bootdemo.durid.model.ZuanAccount">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="freeze_balance" jdbcType="DECIMAL" property="freezeBalance" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="user_type" jdbcType="TINYINT" property="userType" />
+    <result column="create_ip" jdbcType="VARCHAR" property="createIp" />
+    <result column="recent_ip_addr" jdbcType="VARCHAR" property="recentIpAddr" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_name, balance, freeze_balance, `status`, user_type, create_ip, recent_ip_addr, 
+    gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zuan_account
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from zuan_account
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="cn.yn.bootdemo.durid.model.ZuanAccount" useGeneratedKeys="true">
+    insert into zuan_account (user_name, balance, freeze_balance, 
+      `status`, user_type, create_ip, 
+      recent_ip_addr, gmt_create, gmt_modified
+      )
+    values (#{userName,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, #{freezeBalance,jdbcType=DECIMAL}, 
+      #{status,jdbcType=TINYINT}, #{userType,jdbcType=TINYINT}, #{createIp,jdbcType=VARCHAR}, 
+      #{recentIpAddr,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="cn.yn.bootdemo.durid.model.ZuanAccount" useGeneratedKeys="true">
+    insert into zuan_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="freezeBalance != null">
+        freeze_balance,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="createIp != null">
+        create_ip,
+      </if>
+      <if test="recentIpAddr != null">
+        recent_ip_addr,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBalance != null">
+        #{freezeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="createIp != null">
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="recentIpAddr != null">
+        #{recentIpAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yn.bootdemo.durid.model.ZuanAccount">
+    update zuan_account
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBalance != null">
+        freeze_balance = #{freezeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="createIp != null">
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="recentIpAddr != null">
+        recent_ip_addr = #{recentIpAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yn.bootdemo.durid.model.ZuanAccount">
+    update zuan_account
+    set user_name = #{userName,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      freeze_balance = #{freezeBalance,jdbcType=DECIMAL},
+      `status` = #{status,jdbcType=TINYINT},
+      user_type = #{userType,jdbcType=TINYINT},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      recent_ip_addr = #{recentIpAddr,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>
